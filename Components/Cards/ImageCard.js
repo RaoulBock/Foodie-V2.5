@@ -2,14 +2,14 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { COLORS } from "../../Context/settings";
 
-const ImageCard = ({ img, profile_image, username }) => {
+const ImageCard = ({ item }) => {
   return (
     <View style={styles.outline}>
       <View style={styles.grid}>
-        <Image source={profile_image} />
-        <Text style={styles.text}>{username}</Text>
+        {/* <Image source={profile_image} /> */}
+        <Text style={styles.text}>{item.created_at}</Text>
       </View>
-      <Image source={img} style={styles.img} />
+      {/* <Image source={img} style={styles.img} /> */}
     </View>
   );
 };

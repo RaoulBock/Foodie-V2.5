@@ -5,6 +5,7 @@ import { COLORS } from "../Context/settings";
 import SearchInput from "../Components/Input/SearchInput";
 import Modal from "../Components/Modal/Modal";
 import { AppContext } from "../Context/AppContext";
+import ImageCard from "../Components/Cards/ImageCard";
 
 const HomeScreen = () => {
   const { dataset } = React.useContext(AppContext);
@@ -18,7 +19,17 @@ const HomeScreen = () => {
         <SearchInput placeholder={"Search photos"} />
       </View>
 
-      <Modal dataset={dataset} />
+      {dataset ? (
+        <View>
+          {dataset.map((e, i) => {
+            return <ImageCard key={i} item={e} />;
+          })}
+        </View>
+      ) : (
+        <Text>Something went wrong</Text>
+      )}
+
+      {/* <Modal dataset={dataset} /> */}
     </View>
   );
 };
