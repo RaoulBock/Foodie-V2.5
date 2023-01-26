@@ -13,6 +13,8 @@ const HomeScreen = () => {
         <Text style={styles.title}>Find Awesome Photos</Text>
         <SearchInput placeholder={"Search photos"} />
       </View>
+
+      <View></View>
     </View>
   );
 };
