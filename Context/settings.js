@@ -18,4 +18,10 @@ export const APP_ICONS = {
       style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
     />
   ),
+  SEARCH: (
+    <Ionicons
+      name={"ios-search-outline"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
+    />
+  ),
 };

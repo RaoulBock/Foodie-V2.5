@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
 import React from "react";
 import Nav from "../Components/Nav/Nav";
 import { COLORS } from "../Context/settings";
+import SearchInput from "../Components/Input/SearchInput";
 
 const HomeScreen = () => {
   return (
@@ -10,6 +11,7 @@ const HomeScreen = () => {
 
       <View style={styles.section}>
         <Text style={styles.title}>Find Awesome Photos</Text>
+        <SearchInput placeholder={"Search photos"} />
       </View>
     </View>
   );
