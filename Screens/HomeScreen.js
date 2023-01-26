@@ -3,8 +3,12 @@ import React from "react";
 import Nav from "../Components/Nav/Nav";
 import { COLORS } from "../Context/settings";
 import SearchInput from "../Components/Input/SearchInput";
+import Modal from "../Components/Modal/Modal";
+import { AppContext } from "../Context/AppContext";
 
 const HomeScreen = () => {
+  const { dataset } = React.useContext(AppContext);
+
   return (
     <View style={styles.outline}>
       <Nav title={"Picafy"} />
@@ -14,7 +18,7 @@ const HomeScreen = () => {
         <SearchInput placeholder={"Search photos"} />
       </View>
 
-      <View></View>
+      <Modal dataset={dataset} />
     </View>
   );
 };
@@ -26,8 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     backgroundColor: "#fdfdfd",
-    marginVertical: 10,
-    marginHorizontal: 10,
   },
   section: {
     marginTop: 40,
