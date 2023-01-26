@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  StatusBar,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import React from "react";
 import Nav from "../Components/Nav/Nav";
 import { COLORS } from "../Context/settings";
@@ -9,28 +17,46 @@ import ImageCard from "../Components/Cards/ImageCard";
 
 const HomeScreen = () => {
   const { dataset } = React.useContext(AppContext);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
-    <View style={styles.outline}>
-      <Nav title={"Picafy"} />
+    <ScrollView>
+      <View style={styles.outline}>
+        <Nav title={"Picafy"} />
 
-      <View style={styles.section}>
-        <Text style={styles.title}>Find Awesome Photos</Text>
-        <SearchInput placeholder={"Search photos"} />
-      </View>
-
-      {dataset ? (
-        <View>
-          {dataset.map((e, i) => {
-            return <ImageCard key={i} item={e} />;
-          })}
+        <View style={styles.section}>
+          <Text style={styles.title}>Find Awesome Photos</Text>
+          <SearchInput placeholder={"Search photos"} />
         </View>
-      ) : (
-        <Text>Something went wrong</Text>
-      )}
 
-      {/* <Modal dataset={dataset} /> */}
-    </View>
+        {dataset ? (
+          <FlatList
+            data={dataset}
+            renderItem={({ item }) => <ImageCard item={item} />}
+            keyExtractor={(item) => `${item.id}-${item.name}`}
+            initialNumToRender={5}
+            onEndReachedThreshold={0.5}
+            maxToRenderPerBatch={5}
+            onEndReached={() => {
+              setIsLoading(true);
+              // fetch more data
+              setIsLoading(false);
+            }}
+            ListFooterComponent={
+              isLoading ? (
+                <View style={styles.loadingContainer}>
+                  <ActivityIndicator size="large" color="#0000ff" />
+                </View>
+              ) : null
+            }
+          />
+        ) : (
+          <Text>Something went wrong</Text>
+        )}
+
+        {/* <Modal dataset={dataset} /> */}
+      </View>
+    </ScrollView>
   );
 };
 

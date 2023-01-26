@@ -24,4 +24,17 @@ export const APP_ICONS = {
       style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
     />
   ),
+  HEART: (
+    <Ionicons
+      name={"ios-heart-outline"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
+    />
+  ),
+  LIKED: <Ionicons name={"ios-heart"} style={{ color: "red", fontSize: 28 }} />,
+  DOWNLOAD: (
+    <Ionicons
+      name={"ios-download-outline"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
+    />
+  ),
 };

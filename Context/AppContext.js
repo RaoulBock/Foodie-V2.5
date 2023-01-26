@@ -10,6 +10,7 @@ export const AppContext = React.createContext({
 const AppProvider = ({ children }) => {
   const [navPage, setNavPage] = React.useState(APP_PAGES.APP.HOME);
   const [dataset, setDataset] = React.useState();
+  const [isLiked, setIsLiked] = React.useState(false);
 
   React.useEffect(() => {
     const myHeaders = new Headers();
@@ -40,6 +41,8 @@ const AppProvider = ({ children }) => {
         setNavPage,
         dataset,
         setDataset,
+        isLiked,
+        setIsLiked,
       }}
     >
       {children}
