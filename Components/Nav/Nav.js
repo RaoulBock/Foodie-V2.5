@@ -1,10 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { APP_ICONS, COLORS } from "../../Context/settings";
 
 const Nav = ({ title }) => {
   return (
     <View style={styles.outline}>
-      <Text>{title}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <TouchableOpacity>
+        <Text>{APP_ICONS.MENU}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -16,5 +20,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  title: {
+    color: COLORS.TEXT_COLOR,
+    fontSize: 25,
+    fontWeight: "700",
   },
 });
