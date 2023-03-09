@@ -3,7 +3,7 @@ const config = {
   port: 9443,
   jwtSecret: "++=$##3..<./--_--)",
   mongoUri:
-    "mongodb+srv://CRUD:CRUD@crud.npmpn.mongodb.net/market_place?authSource=admin&replicaSet=atlas-ot6nuf-shard-0&readPreference=primary&ssl=true"
+    "mongodb+srv://CRUD:CRUD@crud.npmpn.mongodb.net/foodie?authSource=admin&replicaSet=atlas-ot6nuf-shard-0&readPreference=primary&ssl=true"
 };
 
 module.exports = config;
