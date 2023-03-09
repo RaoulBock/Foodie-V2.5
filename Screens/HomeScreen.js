@@ -10,12 +10,13 @@ import {
 } from "react-native";
 import React from "react";
 import Nav from "../Components/Nav/Nav";
-import { APP_ICONS, COLORS } from "../Context/settings";
+import { APP_ICONS, COLORS, SETTINGS_DATASET } from "../Context/settings";
 import SearchInput from "../Components/Input/SearchInput";
 import { AppContext } from "../Context/AppContext";
 import ImageCard from "../Components/Cards/ImageCard";
 import Model from "../Components/Modal/Model";
 import ModelNav from "../Components/Nav/ModelNav";
+import List from "../Components/List/List";
 
 const HomeScreen = () => {
   const { showModal, setShowModal } = React.useContext(AppContext);
@@ -34,6 +35,11 @@ const HomeScreen = () => {
               onPress={() => setShowModal(!showModal)}
               icon={APP_ICONS.EXIT}
             />
+            <View>
+              {SETTINGS_DATASET.map((e, i) => {
+                return <List key={i} item={e} />;
+              })}
+            </View>
           </View>
         </Model>
       )}

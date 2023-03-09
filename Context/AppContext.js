@@ -7,7 +7,7 @@ export const AppContext = React.createContext({
 });
 
 const AppProvider = ({ children }) => {
-  const [navPage, setNavPage] = React.useState(APP_PAGES.APP.HOME);
+  const [navPage, setNavPage] = React.useState(APP_PAGES.APP.LOGIN);
   const [showModal, setShowModal] = React.useState(false);
 
   return (
