@@ -5,6 +5,7 @@ import { AppContext } from "../../Context/AppContext";
 
 const ImageCard = ({ item }) => {
   const { isLiked, setIsLiked } = React.useContext(AppContext);
+
   return (
     <View style={styles.outline}>
       <View style={styles.grid}>

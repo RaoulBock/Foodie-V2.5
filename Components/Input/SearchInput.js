@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 50,
     width: "100%",
-    marginVertical: 20,
+    marginVertical: 20
   },
   input: {
     width: "90%",
-    padding: 20,
-  },
+    padding: 10
+  }
 });

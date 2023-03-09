@@ -1,12 +1,12 @@
 export const APP_PAGES = {
   APP: {
-    HOME: "HOME",
-  },
+    HOME: "HOME"
+  }
 };
 
 export const COLORS = {
   BACKGROUND: "#ffffff",
-  TEXT_COLOR: "#404040",
+  TEXT_COLOR: "#404040"
 };
 
 import { Ionicons } from "react-native-vector-icons";
@@ -37,4 +37,29 @@ export const APP_ICONS = {
       style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
     />
   ),
+  EXIT: (
+    <Ionicons
+      name={"ios-close-outline"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
+    />
+  )
 };
+
+export const SETTINGS_DATASET = [
+  {
+    id: 1,
+    name: "Profile"
+  },
+  {
+    id: 2,
+    name: "Password"
+  },
+  {
+    id: 3,
+    name: "Billing"
+  },
+  {
+    id: 4,
+    name: "My Orders"
+  }
+];

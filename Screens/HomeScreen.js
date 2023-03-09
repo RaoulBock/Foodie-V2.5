@@ -6,30 +6,44 @@ import {
   StatusBar,
   ScrollView,
   FlatList,
+  TouchableOpacity
 } from "react-native";
 import React from "react";
 import Nav from "../Components/Nav/Nav";
-import { COLORS } from "../Context/settings";
+import { APP_ICONS, COLORS } from "../Context/settings";
 import SearchInput from "../Components/Input/SearchInput";
-import Modal from "../Components/Modal/Modal";
 import { AppContext } from "../Context/AppContext";
 import ImageCard from "../Components/Cards/ImageCard";
+import Model from "../Components/Modal/Model";
+import ModelNav from "../Components/Nav/ModelNav";
 
 const HomeScreen = () => {
-  const { dataset } = React.useContext(AppContext);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const { showModal, setShowModal } = React.useContext(AppContext);
 
   return (
-    <ScrollView>
-      <View style={styles.outline}>
-        <Nav title={"Picafy"} />
-
+    <View style={styles.outline}>
+      <Nav title={"FoodIe"} />
+      {showModal && (
+        <Model
+          visible={showModal}
+          onRequestClose={() => setShowModal(!showModal)}
+        >
+          <View style={styles.container}>
+            <ModelNav
+              title={"Settings"}
+              onPress={() => setShowModal(!showModal)}
+              icon={APP_ICONS.EXIT}
+            />
+          </View>
+        </Model>
+      )}
+      <ScrollView>
         <View style={styles.section}>
-          <Text style={styles.title}>Find Awesome Photos</Text>
+          <Text style={styles.title}>What are you looking for ?</Text>
           <SearchInput placeholder={"Search photos"} />
         </View>
 
-        {dataset ? (
+        {/* {dataset ? (
           <FlatList
             data={dataset}
             renderItem={({ item }) => <ImageCard item={item} />}
@@ -52,11 +66,11 @@ const HomeScreen = () => {
           />
         ) : (
           <Text>Something went wrong</Text>
-        )}
+        )} */}
 
         {/* <Modal dataset={dataset} /> */}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -66,15 +80,20 @@ const styles = StyleSheet.create({
   outline: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    backgroundColor: "#fdfdfd",
+    backgroundColor: "#fdfdfd"
   },
   section: {
     marginTop: 40,
-    marginHorizontal: 20,
+    marginHorizontal: 20
   },
   title: {
     color: COLORS.TEXT_COLOR,
     fontWeight: "700",
-    fontSize: 50,
+    fontSize: 50
   },
+  container: {
+    backgroundColor: "#fff",
+    height: "100%",
+    paddingHorizontal: 20
+  }
 });
