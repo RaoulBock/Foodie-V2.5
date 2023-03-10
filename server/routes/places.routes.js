@@ -6,7 +6,7 @@ const place = require("../models/places.model");
 // POST route to create a new real estate listing
 router.post("/places", (req, res) => {
   const newListing = new place({
-    streetName: req.body.streetName,
+    address: req.body.address,
     amount: req.body.amount,
     description: req.body.description,
     description_2: req.body.description_2,

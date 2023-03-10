@@ -41,7 +41,8 @@ const LoginScreen = () => {
             account_email: response.user.email,
             account_type: response.user.account_type,
             account_phone: response.user.phone,
-            account_verification: response.user.account_verification
+            account_verification: response.user.account_verification,
+            account_image: response.user.image
           });
         }
 

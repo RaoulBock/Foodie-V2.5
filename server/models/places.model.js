@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const placesSchema = new Schema({
-  streetName: {
+  address: {
     type: String,
     trim: true,
     required: true
@@ -13,7 +13,7 @@ const placesSchema = new Schema({
     required: true
   },
   description: {
-    type: String,
+    type: Array,
     trim: true,
     required: true
   },

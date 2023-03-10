@@ -6,7 +6,8 @@ import {
   StatusBar,
   ScrollView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  RefreshControl
 } from "react-native";
 import React from "react";
 import Nav from "../Components/Nav/Nav";
@@ -17,13 +18,31 @@ import ImageCard from "../Components/Cards/ImageCard";
 import Model from "../Components/Modal/Model";
 import ModelNav from "../Components/Nav/ModelNav";
 import List from "../Components/List/List";
+import PlacesCard from "../Components/Cards/PlacesCard";
 
 const HomeScreen = () => {
-  const { showModal, setShowModal, userData } = React.useContext(AppContext);
+  const {
+    showModal,
+    setShowModal,
+    placeData,
+    onRefresh,
+    refreshing,
+    setRefreshing
+  } = React.useContext(AppContext);
+
+  console.log(placeData);
+
+  const [searchQuery, setSearchQuery] = React.useState("");
+
+  const filteredData = placeData.filter((item) => {
+    item.amount.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.method_type.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   return (
     <View style={styles.outline}>
-      <Nav title={"FoodIe"} />
+      <Nav title={"MyPlace"} />
       {showModal && (
         <Model
           visible={showModal}
@@ -43,10 +62,77 @@ const HomeScreen = () => {
           </View>
         </Model>
       )}
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={styles.section}>
-          <Text style={styles.title}>Where are you looking to go ?</Text>
+          <Text style={styles.title}>What are you looking for ?</Text>
           <SearchInput placeholder={"Search photos"} />
+        </View>
+
+        <View style={styles.layer}>
+          <View style={styles.layerHeader}>
+            <Text style={styles.text}>Rooms</Text>
+            <TouchableOpacity>
+              <Text style={{ color: "#0f5298", fontWeight: "500" }}>
+                View all
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {placeData ? (
+              placeData.map((e, i) => {
+                if (e.description_2 === "room")
+                  return <PlacesCard key={i} item={e} />;
+              })
+            ) : (
+              <Text>Loading...</Text>
+            )}
+          </ScrollView>
+        </View>
+
+        <View style={styles.layer}>
+          <View style={styles.layerHeader}>
+            <Text style={styles.text}>Houses</Text>
+            <TouchableOpacity>
+              <Text style={{ color: "#0f5298", fontWeight: "500" }}>
+                View all
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {placeData ? (
+              placeData.map((e, i) => {
+                if (e.description_2 === "house")
+                  return <PlacesCard key={i} item={e} />;
+              })
+            ) : (
+              <Text>Loading...</Text>
+            )}
+          </ScrollView>
+        </View>
+
+        <View style={styles.layer}>
+          <View style={styles.layerHeader}>
+            <Text style={styles.text}>Students</Text>
+            <TouchableOpacity>
+              <Text style={{ color: "#0f5298", fontWeight: "500" }}>
+                View all
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {placeData ? (
+              placeData.map((e, i) => {
+                if (e.description_2 === "student")
+                  return <PlacesCard key={i} item={e} />;
+              })
+            ) : (
+              <Text>Loading...</Text>
+            )}
+          </ScrollView>
         </View>
 
         {/* {dataset ? (
@@ -101,5 +187,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     height: "100%",
     paddingHorizontal: 20
+  },
+  text: {
+    fontWeight: "500",
+    color: "#404040"
+  },
+  layerHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10
+  },
+  layer: {
+    marginVertical: 20,
+    paddingHorizontal: 2
   }
 });
