@@ -40,6 +40,13 @@ const HomeScreen = () => {
       item.method_type.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
+  const [visibleCount, setVisibleCount] = React.useState(4);
+  const [visibleShift, setVisibleShift] = React.useState(10);
+
+  const handleSeeMore = () => {
+    setVisibleCount(visibleCount + 4);
+  };
+
   return (
     <View style={styles.outline}>
       <Nav title={"MyPlace"} />
@@ -69,71 +76,62 @@ const HomeScreen = () => {
       >
         <View style={styles.section}>
           <Text style={styles.title}>What are you looking for ?</Text>
-          <SearchInput placeholder={"Search photos"} />
+          <SearchInput
+            placeholder={"Search for price, street name, town ext."}
+          />
         </View>
 
-        <View style={styles.layer}>
-          <View style={styles.layerHeader}>
-            <Text style={styles.text}>Rooms</Text>
-            <TouchableOpacity>
-              <Text style={{ color: "#0f5298", fontWeight: "500" }}>
-                View all
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {placeData ? (
-              placeData.map((e, i) => {
-                if (e.description_2 === "room")
-                  return <PlacesCard key={i} item={e} />;
-              })
-            ) : (
-              <Text>Loading...</Text>
-            )}
-          </ScrollView>
+        {placeData ? (
+          placeData.slice(0, visibleCount).map((e, i) => {
+            return <PlacesCard key={i} item={e} />;
+          })
+        ) : (
+          <Text>Loading...</Text>
+        )}
+
+        {visibleCount < placeData.length && (
+          <TouchableOpacity onPress={handleSeeMore} style={styles.seeMoreBtn}>
+            <Text>See more</Text>
+          </TouchableOpacity>
+        )}
+
+        <View style={styles.section}>
+          <Text style={styles.title}>Houses</Text>
         </View>
 
-        <View style={styles.layer}>
-          <View style={styles.layerHeader}>
-            <Text style={styles.text}>Houses</Text>
-            <TouchableOpacity>
-              <Text style={{ color: "#0f5298", fontWeight: "500" }}>
-                View all
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {placeData ? (
-              placeData.map((e, i) => {
-                if (e.description_2 === "house")
-                  return <PlacesCard key={i} item={e} />;
-              })
-            ) : (
-              <Text>Loading...</Text>
-            )}
-          </ScrollView>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {placeData ? (
+            placeData.slice(0, visibleShift).map((e, i) => {
+              if (e.description_2 === "house")
+                return (
+                  <View style={{ width: 350 }} key={i}>
+                    <PlacesCard item={e} />
+                  </View>
+                );
+            })
+          ) : (
+            <Text>Loading...</Text>
+          )}
+        </ScrollView>
+
+        <View style={styles.section}>
+          <Text style={styles.title}>Apartment</Text>
         </View>
 
-        <View style={styles.layer}>
-          <View style={styles.layerHeader}>
-            <Text style={styles.text}>Students</Text>
-            <TouchableOpacity>
-              <Text style={{ color: "#0f5298", fontWeight: "500" }}>
-                View all
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {placeData ? (
-              placeData.map((e, i) => {
-                if (e.description_2 === "student")
-                  return <PlacesCard key={i} item={e} />;
-              })
-            ) : (
-              <Text>Loading...</Text>
-            )}
-          </ScrollView>
-        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {placeData ? (
+            placeData.slice(0, visibleShift).map((e, i) => {
+              if (e.description_2 === "apartment")
+                return (
+                  <View style={{ width: 350 }} key={i}>
+                    <PlacesCard item={e} />
+                  </View>
+                );
+            })
+          ) : (
+            <Text>Loading...</Text>
+          )}
+        </ScrollView>
 
         {/* {dataset ? (
           <FlatList
@@ -201,5 +199,9 @@ const styles = StyleSheet.create({
   layer: {
     marginVertical: 20,
     paddingHorizontal: 2
+  },
+  seeMoreBtn: {
+    alignItems: "center",
+    paddingVertical: 20
   }
 });

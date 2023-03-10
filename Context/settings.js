@@ -10,7 +10,7 @@ export const COLORS = {
   TEXT_COLOR: "#404040"
 };
 
-import { Ionicons } from "react-native-vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "react-native-vector-icons";
 
 export const APP_ICONS = {
   MENU: (
@@ -78,6 +78,33 @@ export const APP_ICONS = {
     <Ionicons
       name={"ios-chevron-forward-outline"}
       style={{ color: COLORS.TEXT_COLOR, fontSize: 28 }}
+    />
+  ),
+  BED: (
+    <Ionicons
+      name={"bed-outline"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 14 }}
+    />
+  ),
+  BATH: (
+    <MaterialCommunityIcons
+      name={"bathtub-outline"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 14 }}
+    />
+  ),
+  FEET: (
+    <MaterialCommunityIcons
+      name={"social-distance-6-feet"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 14 }}
+    />
+  ),
+  CUBE: (
+    <Ionicons name={"ios-cube"} style={{ color: "#ed6f2c", fontSize: 14 }} />
+  ),
+  CREATE: (
+    <Ionicons
+      name={"ios-create-outline"}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 25 }}
     />
   )
 };

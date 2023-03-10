@@ -7,20 +7,32 @@ const Nav = ({ title }) => {
   const { setNavPage, setShowModal, navPage, userData } =
     React.useContext(AppContext);
 
+  console.log(userData);
+
   return (
     <View style={styles.outline}>
       <Text style={styles.title}>
         {title}
         {userData && (
-          <Text style={{ fontSize: 12 }}> • {userData.account_name}</Text>
+          <Text style={{ fontSize: 12 }}>
+            {" "}
+            • {userData.account_name} • {userData.account_type}
+          </Text>
         )}
       </Text>
       {userData ? (
         <View>
           {navPage === APP_PAGES.APP.LOGIN ? null : (
-            <TouchableOpacity onPress={() => setShowModal(true)}>
-              <Text>{APP_ICONS.MENU}</Text>
-            </TouchableOpacity>
+            <View style={styles.grid}>
+              {userData.account_verification === true && (
+                <TouchableOpacity style={{ paddingHorizontal: 20 }}>
+                  <Text>{APP_ICONS.CREATE}</Text>
+                </TouchableOpacity>
+              )}
+              <TouchableOpacity onPress={() => setShowModal(true)}>
+                <Text>{APP_ICONS.MENU}</Text>
+              </TouchableOpacity>
+            </View>
           )}
         </View>
       ) : (
@@ -39,11 +51,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    paddingBottom: 10
   },
   title: {
     color: COLORS.TEXT_COLOR,
     fontSize: 25,
     fontWeight: "700"
+  },
+  grid: {
+    flexDirection: "row",
+    alignItems: "center"
   }
 });
