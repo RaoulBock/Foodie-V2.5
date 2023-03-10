@@ -25,7 +25,10 @@ const Nav = ({ title }) => {
           {navPage === APP_PAGES.APP.LOGIN ? null : (
             <View style={styles.grid}>
               {userData.account_verification === true && (
-                <TouchableOpacity style={{ paddingHorizontal: 20 }}>
+                <TouchableOpacity
+                  style={{ paddingHorizontal: 20 }}
+                  onPress={() => setNavPage(APP_PAGES.APP.CREATE)}
+                >
                   <Text>{APP_ICONS.CREATE}</Text>
                 </TouchableOpacity>
               )}

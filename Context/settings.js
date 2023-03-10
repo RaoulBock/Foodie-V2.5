@@ -1,7 +1,8 @@
 export const APP_PAGES = {
   APP: {
     HOME: "HOME",
-    LOGIN: "LOGIN"
+    LOGIN: "LOGIN",
+    CREATE: "CREATE"
   }
 };
 
@@ -106,6 +107,9 @@ export const APP_ICONS = {
       name={"ios-create-outline"}
       style={{ color: COLORS.TEXT_COLOR, fontSize: 25 }}
     />
+  ),
+  BACK: (
+    <Ionicons name={"ios-arrow-back"} style={{ color: "#fff", fontSize: 25 }} />
   )
 };
 
