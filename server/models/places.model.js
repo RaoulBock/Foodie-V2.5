@@ -5,48 +5,53 @@ const placesSchema = new Schema({
   streetName: {
     type: String,
     trim: true,
-    required: true,
+    required: true
   },
   amount: {
     type: String,
     trim: true,
-    required: true,
+    required: true
   },
   description: {
     type: String,
     trim: true,
-    required: true,
+    required: true
+  },
+  description_2: {
+    type: String,
+    trim: true,
+    required: true
   },
   images: {
     type: Object,
     trim: true,
     default:
-      "https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png",
+      "https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png"
   },
   contactNumber: {
     type: String,
     trim: true,
-    required: true,
+    required: true
   },
   method_type: {
     type: String,
     trim: true,
-    required: true,
+    required: true
   },
   payment_type: {
     type: String,
     trim: true,
-    required: true,
+    required: true
   },
   user_created: {
     type: String,
     trim: true,
-    required: true,
+    required: true
   },
   created: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 // const RealEstate = mongoose.model("places", placesSchema);

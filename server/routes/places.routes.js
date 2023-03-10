@@ -9,11 +9,12 @@ router.post("/places", (req, res) => {
     streetName: req.body.streetName,
     amount: req.body.amount,
     description: req.body.description,
+    description_2: req.body.description_2,
     images: req.body.images,
     contactNumber: req.body.contactNumber,
     method_type: req.body.method_type,
     payment_type: req.body.payment_type,
-    user_created: req.body.user_created,
+    user_created: req.body.user_created
   });
   newListing.save((err) => {
     if (err) {

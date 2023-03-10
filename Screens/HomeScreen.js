@@ -19,7 +19,7 @@ import ModelNav from "../Components/Nav/ModelNav";
 import List from "../Components/List/List";
 
 const HomeScreen = () => {
-  const { showModal, setShowModal } = React.useContext(AppContext);
+  const { showModal, setShowModal, userData } = React.useContext(AppContext);
 
   return (
     <View style={styles.outline}>
@@ -45,7 +45,7 @@ const HomeScreen = () => {
       )}
       <ScrollView>
         <View style={styles.section}>
-          <Text style={styles.title}>What are you looking for ?</Text>
+          <Text style={styles.title}>Where are you looking to go ?</Text>
           <SearchInput placeholder={"Search photos"} />
         </View>
 

@@ -6,23 +6,20 @@ export const ApiServices = {
 
     var raw = JSON.stringify({
       email: email,
-      password: password,
+      password: password
     });
 
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow",
+      redirect: "follow"
     };
 
-    return fetch(
-      "https://market-place-main.onrender.com/auth/signin",
-      requestOptions
-    )
+    return fetch("https://foodie-kgss.onrender.com/auth/signin", requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        //  console.log(result);
         return JSON.parse(result);
       })
       .catch((error) => console.log("error", error));
@@ -34,7 +31,7 @@ export const ApiServices = {
     account_verification,
     account_type,
     phone,
-    password,
+    password
   }) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -45,67 +42,64 @@ export const ApiServices = {
       account_verification: account_verification,
       account_type: account_type,
       phone: phone,
-      password: password,
+      password: password
     });
 
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow",
+      redirect: "follow"
     };
 
-    return fetch(
-      "https://market-place-main.onrender.com/api/users",
-      requestOptions
-    )
+    return fetch("https://foodie-kgss.onrender.com/api/users", requestOptions)
       .then((response) => response.text())
       .then((result) => {
         console.log(result);
         return JSON.parse(result);
       })
       .catch((error) => console.log("error", error));
-  },
+  }
 
-  on_post_house: async ({
-    streetName,
-    amount,
-    description,
-    images,
-    contactNumber,
-    method_type,
-    payment_type,
-  }) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+  // on_post_house: async ({
+  //   streetName,
+  //   amount,
+  //   description,
+  //   images,
+  //   contactNumber,
+  //   method_type,
+  //   payment_type
+  // }) => {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
-      streetName: streetName,
-      amount: amount,
-      description: description,
-      images: images,
-      contactNumber: contactNumber,
-      method_type: method_type,
-      payment_type: payment_type,
-    });
+  //   var raw = JSON.stringify({
+  //     streetName: streetName,
+  //     amount: amount,
+  //     description: description,
+  //     images: images,
+  //     contactNumber: contactNumber,
+  //     method_type: method_type,
+  //     payment_type: payment_type
+  //   });
 
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+  //   var requestOptions = {
+  //     method: "POST",
+  //     headers: myHeaders,
+  //     body: raw,
+  //     redirect: "follow"
+  //   };
 
-    return fetch(
-      "https://market-place-main.onrender.com/places",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        console.log(result);
-        return JSON.parse(result);
-      })
-      .catch((error) => console.log("error", error));
-  },
+  //   return fetch(
+  //     "https://market-place-main.onrender.com/places",
+  //     requestOptions
+  //   )
+  //     .then((response) => response.text())
+  //     .then((result) => {
+  //       console.log(result);
+  //       return JSON.parse(result);
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // }
   // on_get_cities: async({}),
 };
