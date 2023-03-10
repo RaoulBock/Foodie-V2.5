@@ -140,3 +140,25 @@ export const SETTINGS_DATASET = [
     icon: APP_ICONS.LOGOUT
   }
 ];
+
+export const METHOD_TYPE = [
+  {
+    id: 1,
+    name: "Rent"
+  },
+  {
+    id: 2,
+    name: "Annual"
+  }
+];
+
+export const PAYMENT_METHOD = [
+  {
+    id: 1,
+    name: "/PM"
+  },
+  {
+    id: 2,
+    name: "Annual"
+  }
+];
