@@ -4,12 +4,15 @@ import {
   View,
   Platform,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  Image,
+  ScrollView
 } from "react-native";
 import React from "react";
 import PageNav from "../Components/Nav/PageNav";
 import { AppContext } from "../Context/AppContext";
 import {
+  APP_ICONS,
   APP_PAGES,
   COLORS,
   METHOD_TYPE,
@@ -17,6 +20,10 @@ import {
 } from "../Context/settings";
 import CreateInput from "../Components/Input/CreateInput";
 import OptionsBtn from "../Components/Button/OptionsBtn";
+import Button from "../Components/Button/Button";
+
+import * as ImagePicker from "expo-image-picker";
+import DescriptionInput from "../Components/Input/DescriptionInput";
 
 const CreateScreen = () => {
   const { setNavPage, userData } = React.useContext(AppContext);
@@ -24,12 +31,30 @@ const CreateScreen = () => {
   const [mainMethod, setMainMethod] = React.useState("Rent");
   const [mainPayment, setMainPayment] = React.useState("/PM");
 
-  console.log(mainMethod);
+  const [images, setImages] = React.useState([]);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true,
+      quality: 1
+    });
+
+    if (!result.cancelled) {
+      setImages(result.assets);
+    }
+  };
+
+  const handlePost = () => {
+    console.log("Creating post.");
+  };
+
   return (
     <View style={styles.outline}>
       <PageNav
         title={"Create"}
         onPress={() => setNavPage(APP_PAGES.APP.HOME)}
+        onSave={handlePost}
       />
       <View style={styles.section}>
         <Text style={styles.title}>Start selling today?</Text>
@@ -41,47 +66,80 @@ const CreateScreen = () => {
         )}
       </View>
 
-      <View style={styles.section}>
-        <View>
-          <CreateInput
-            label={"Address"}
-            placeholder={"456 Oak St, Smallville, USA"}
-          />
-        </View>
-        <View style={styles.formCtrl}>
-          <CreateInput
-            label={"Price"}
-            placeholder={"2000"}
-            keyboardType={"numeric"}
-          />
-        </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.section}>
+          <View>
+            <CreateInput
+              label={"Address"}
+              placeholder={"456 Oak St, Smallville, USA"}
+            />
+          </View>
+          <View style={styles.formCtrl}>
+            <CreateInput
+              label={"Price"}
+              placeholder={"2000"}
+              keyboardType={"numeric"}
+            />
+          </View>
 
-        <View style={[styles.formCtrl, styles.grid]}>
-          {PAYMENT_METHOD.map((e, i) => {
-            return (
-              <OptionsBtn
-                key={i}
-                style={mainPayment === e.name ? styles.active : styles.btn}
-                onPress={() => setMainPayment(e.name)}
-                textstyle={
-                  mainPayment === e.name ? styles.textActive : styles.text
-                }
-                title={e.name}
-              />
-            );
-          })}
-        </View>
+          <View style={[styles.formCtrl, styles.grid]}>
+            {PAYMENT_METHOD.map((e, i) => {
+              return (
+                <OptionsBtn
+                  key={i}
+                  style={mainPayment === e.name ? styles.active : styles.btn}
+                  onPress={() => setMainPayment(e.name)}
+                  textstyle={
+                    mainPayment === e.name ? styles.textActive : styles.text
+                  }
+                  title={e.name}
+                />
+              );
+            })}
+          </View>
 
-        <View style={styles.formCtrl}>
-          <CreateInput
-            label={"Contact"}
-            placeholder={""}
-            keyboardType={"numeric"}
-            value={userData.account_phone}
-          />
-        </View>
+          <View style={styles.formCtrl}>
+            <CreateInput
+              label={"Contact"}
+              placeholder={""}
+              keyboardType={"numeric"}
+              value={userData.account_phone}
+            />
+          </View>
 
-        <View style={[styles.formCtrl, styles.grid]}>
+          <View
+            style={[
+              styles.formCtrl,
+              styles.grid,
+              { justifyContent: "space-between" }
+            ]}
+          >
+            <DescriptionInput icon={APP_ICONS.BED} />
+            <DescriptionInput icon={APP_ICONS.BATH} />
+            <DescriptionInput icon={APP_ICONS.FEET} />
+          </View>
+
+          <View style={[styles.formCtrl, styles.grid]}>
+            <Button
+              title={"Upload images"}
+              icon={APP_ICONS.IMAGES}
+              onPress={pickImage}
+            />
+          </View>
+
+          <View style={[styles.formCtrl, { marginBottom: 50 }]}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {images.map((image) => (
+                <Image
+                  source={{ uri: image.uri }}
+                  key={image.uri}
+                  style={styles.createdImage}
+                />
+              ))}
+            </ScrollView>
+          </View>
+
+          {/* <View style={[styles.formCtrl, styles.grid]}>
           {METHOD_TYPE.map((e, i) => {
             return (
               <OptionsBtn
@@ -95,8 +153,9 @@ const CreateScreen = () => {
               />
             );
           })}
+        </View> */}
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -142,8 +201,7 @@ const styles = StyleSheet.create({
   },
   grid: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: "center"
   },
   text: {
     fontWeight: "500",
@@ -152,5 +210,20 @@ const styles = StyleSheet.create({
   textActive: {
     fontWeight: "500",
     color: "#fff"
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: "bold",
+    top: -10,
+    position: "absolute",
+    backgroundColor: "#fff",
+    zIndex: 9,
+    left: 10
+  },
+  createdImage: {
+    width: 150,
+    height: 200,
+    marginHorizontal: 10,
+    borderRadius: 10
   }
 });

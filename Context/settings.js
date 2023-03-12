@@ -84,19 +84,19 @@ export const APP_ICONS = {
   BED: (
     <Ionicons
       name={"bed-outline"}
-      style={{ color: COLORS.TEXT_COLOR, fontSize: 14 }}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 17 }}
     />
   ),
   BATH: (
     <MaterialCommunityIcons
       name={"bathtub-outline"}
-      style={{ color: COLORS.TEXT_COLOR, fontSize: 14 }}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 17 }}
     />
   ),
   FEET: (
     <MaterialCommunityIcons
       name={"social-distance-6-feet"}
-      style={{ color: COLORS.TEXT_COLOR, fontSize: 14 }}
+      style={{ color: COLORS.TEXT_COLOR, fontSize: 17 }}
     />
   ),
   CUBE: (
@@ -110,6 +110,12 @@ export const APP_ICONS = {
   ),
   BACK: (
     <Ionicons name={"ios-arrow-back"} style={{ color: "#fff", fontSize: 25 }} />
+  ),
+  IMAGES: (
+    <Ionicons
+      name={"ios-images-outline"}
+      style={{ color: "#ed6f2c", fontSize: 45 }}
+    />
   )
 };
 
@@ -141,16 +147,16 @@ export const SETTINGS_DATASET = [
   }
 ];
 
-export const METHOD_TYPE = [
-  {
-    id: 1,
-    name: "Rent"
-  },
-  {
-    id: 2,
-    name: "Annual"
-  }
-];
+// export const METHOD_TYPE = [
+//   {
+//     id: 1,
+//     name: "Renting"
+//   },
+//   {
+//     id: 2,
+//     name: "Selling"
+//   }
+// ];
 
 export const PAYMENT_METHOD = [
   {
@@ -159,6 +165,6 @@ export const PAYMENT_METHOD = [
   },
   {
     id: 2,
-    name: "Annual"
+    name: "Selling"
   }
 ];

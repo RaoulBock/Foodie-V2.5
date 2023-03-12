@@ -59,7 +59,7 @@ const LoginScreen = () => {
       <Nav title={"Foodie"} />
       <Image
         source={{
-          uri: "https://cdn.dribbble.com/users/5283725/screenshots/12191223/media/e19c09e51d8703bb170a2b09140b803e.png"
+          uri: "https://media.istockphoto.com/id/1263319152/vector/woman-holding-keys-from-house-for-sale-and-smiling.jpg?s=612x612&w=0&k=20&c=P3HPAsY-YxeqRLfLzX0l1cnqGZYtuISgfCmbG1NRfNg="
         }}
         style={styles.image}
       />

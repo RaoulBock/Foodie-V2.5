@@ -2,13 +2,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { APP_ICONS, COLORS } from "../../Context/settings";
 
-const PageNav = ({ onPress, title }) => {
+const PageNav = ({ onPress, title, onSave }) => {
   return (
     <View style={styles.outline}>
       <TouchableOpacity onPress={onPress} style={styles.btn}>
         <Text>{APP_ICONS.BACK}</Text>
       </TouchableOpacity>
-      <Text style={styles.title}>{title}</Text>
+      <TouchableOpacity onPress={onSave}>
+        <Text style={styles.title}>{title}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
