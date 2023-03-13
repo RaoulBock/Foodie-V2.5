@@ -161,7 +161,7 @@ export const SETTINGS_DATASET = [
 export const PAYMENT_METHOD = [
   {
     id: 1,
-    name: "/PM"
+    name: "Renting"
   },
   {
     id: 2,

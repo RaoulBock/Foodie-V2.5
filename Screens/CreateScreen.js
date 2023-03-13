@@ -29,9 +29,12 @@ const CreateScreen = () => {
   const { setNavPage, userData } = React.useContext(AppContext);
 
   const [mainMethod, setMainMethod] = React.useState("Rent");
-  const [mainPayment, setMainPayment] = React.useState("/PM");
+  const [mainPayment, setMainPayment] = React.useState("Renting");
 
   const [images, setImages] = React.useState([]);
+
+  const [userAddress, setUserAddress] = React.useState("");
+  const [userPrice, setUserPrice] = React.useState("");
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -46,7 +49,8 @@ const CreateScreen = () => {
   };
 
   const handlePost = () => {
-    console.log("Creating post.");
+    if (userAddress === "" || userPrice === "" || mainPayment === "") {
+    }
   };
 
   return (
@@ -56,22 +60,24 @@ const CreateScreen = () => {
         onPress={() => setNavPage(APP_PAGES.APP.HOME)}
         onSave={handlePost}
       />
-      <View style={styles.section}>
-        <Text style={styles.title}>Start selling today?</Text>
-        {userData.account_verification === false && (
-          <Text>
-            Your account is not yet verified. To continue using this feature
-            make sure to verify your account by locating to settings
-          </Text>
-        )}
-      </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.section}>
+          <Text style={styles.title}>Start selling today?</Text>
+          {userData.account_verification === false && (
+            <Text>
+              Your account is not yet verified. To continue using this feature
+              make sure to verify your account by locating to settings
+            </Text>
+          )}
+        </View>
+
         <View style={styles.section}>
           <View>
             <CreateInput
               label={"Address"}
               placeholder={"456 Oak St, Smallville, USA"}
+              onChangeText={(e) => setUserAddress(e)}
             />
           </View>
           <View style={styles.formCtrl}>
@@ -79,6 +85,7 @@ const CreateScreen = () => {
               label={"Price"}
               placeholder={"2000"}
               keyboardType={"numeric"}
+              onChangeText={(e) => setUserPrice(e)}
             />
           </View>
 
@@ -114,9 +121,9 @@ const CreateScreen = () => {
               { justifyContent: "space-between" }
             ]}
           >
-            <DescriptionInput icon={APP_ICONS.BED} />
-            <DescriptionInput icon={APP_ICONS.BATH} />
-            <DescriptionInput icon={APP_ICONS.FEET} />
+            <DescriptionInput icon={APP_ICONS.BED} keyboardType={"numeric"} />
+            <DescriptionInput icon={APP_ICONS.BATH} keyboardType={"numeric"} />
+            <DescriptionInput icon={APP_ICONS.FEET} keyboardType={"numeric"} />
           </View>
 
           <View style={[styles.formCtrl, styles.grid]}>
