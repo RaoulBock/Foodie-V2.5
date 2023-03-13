@@ -24,6 +24,7 @@ import Button from "../Components/Button/Button";
 
 import * as ImagePicker from "expo-image-picker";
 import DescriptionInput from "../Components/Input/DescriptionInput";
+import { ApiServices } from "../utils/ApiServices";
 
 const CreateScreen = () => {
   const { setNavPage, userData } = React.useContext(AppContext);
@@ -32,6 +33,15 @@ const CreateScreen = () => {
   const [mainPayment, setMainPayment] = React.useState("Renting");
 
   const [images, setImages] = React.useState([]);
+  const [userDescription, setUserDescription] = React.useState([
+    bedCount,
+    bathCount,
+    sqrCount
+  ]);
+
+  const [bedCount, setBedCount] = React.useState("");
+  const [bathCount, setBathCount] = React.useState("");
+  const [sqrCount, setSqrCount] = React.useState("");
 
   const [userAddress, setUserAddress] = React.useState("");
   const [userPrice, setUserPrice] = React.useState("");
@@ -50,12 +60,26 @@ const CreateScreen = () => {
     }
   };
 
-  const handlePost = () => {
+  const handlePost = async () => {
     if (userAddress === "" || userPrice === "" || mainPayment === "") {
       setErrorMsg(
         "Please provide the correct information before you continue."
       );
     } else {
+      const response = await ApiServices.on_post_house({
+        streetName: userAddress,
+        description: userDescription,
+        description_2: mainMethod,
+        images: images,
+        contactNumber: userData.account_phone,
+        method_type: mainPayment
+      });
+
+      if (response) {
+        console.log("Response house posting confirmed");
+      } else {
+        console.log("REsponse failed to post");
+      }
     }
   };
 
@@ -146,9 +170,21 @@ const CreateScreen = () => {
               { justifyContent: "space-between" }
             ]}
           >
-            <DescriptionInput icon={APP_ICONS.BED} keyboardType={"numeric"} />
-            <DescriptionInput icon={APP_ICONS.BATH} keyboardType={"numeric"} />
-            <DescriptionInput icon={APP_ICONS.FEET} keyboardType={"numeric"} />
+            <DescriptionInput
+              icon={APP_ICONS.BED}
+              keyboardType={"numeric"}
+              onChangeText={(e) => setBedCount(e)}
+            />
+            <DescriptionInput
+              icon={APP_ICONS.BATH}
+              keyboardType={"numeric"}
+              onChangeText={(e) => setBathCount(e)}
+            />
+            <DescriptionInput
+              icon={APP_ICONS.FEET}
+              keyboardType={"numeric"}
+              onChangeText={(e) => setSqrCount(e)}
+            />
           </View>
 
           <View style={[styles.formCtrl, styles.grid]}>
