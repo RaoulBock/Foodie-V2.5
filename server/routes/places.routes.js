@@ -13,7 +13,7 @@ router.post("/places", (req, res) => {
     images: req.body.images,
     contactNumber: req.body.contactNumber,
     method_type: req.body.method_type,
-    payment_type: req.body.payment_type,
+    //   payment_type: req.body.payment_type,
     user_created: req.body.user_created
   });
   newListing.save((err) => {

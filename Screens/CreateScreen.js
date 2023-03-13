@@ -55,6 +55,7 @@ const CreateScreen = () => {
       setErrorMsg(
         "Please provide the correct information before you continue."
       );
+    } else {
     }
   };
 
