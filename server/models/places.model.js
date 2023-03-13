@@ -23,7 +23,7 @@ const placesSchema = new Schema({
     required: true
   },
   images: {
-    type: Object,
+    type: Array,
     trim: true,
     default:
       "https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png"
