@@ -28,13 +28,15 @@ import DescriptionInput from "../Components/Input/DescriptionInput";
 const CreateScreen = () => {
   const { setNavPage, userData } = React.useContext(AppContext);
 
-  const [mainMethod, setMainMethod] = React.useState("Rent");
+  const [mainMethod, setMainMethod] = React.useState("Apartment");
   const [mainPayment, setMainPayment] = React.useState("Renting");
 
   const [images, setImages] = React.useState([]);
 
   const [userAddress, setUserAddress] = React.useState("");
   const [userPrice, setUserPrice] = React.useState("");
+
+  const [errorMsg, setErrorMsg] = React.useState("");
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -50,6 +52,9 @@ const CreateScreen = () => {
 
   const handlePost = () => {
     if (userAddress === "" || userPrice === "" || mainPayment === "") {
+      setErrorMsg(
+        "Please provide the correct information before you continue."
+      );
     }
   };
 
@@ -80,6 +85,25 @@ const CreateScreen = () => {
               onChangeText={(e) => setUserAddress(e)}
             />
           </View>
+
+          <View style={[styles.formCtrl, styles.grid]}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {METHOD_TYPE.map((e, i) => {
+                return (
+                  <OptionsBtn
+                    key={i}
+                    style={mainMethod === e.name ? styles.active : styles.btn}
+                    onPress={() => setMainMethod(e.name)}
+                    textstyle={
+                      mainMethod === e.name ? styles.textActive : styles.text
+                    }
+                    title={e.name}
+                  />
+                );
+              })}
+            </ScrollView>
+          </View>
+
           <View style={styles.formCtrl}>
             <CreateInput
               label={"Price"}
@@ -202,7 +226,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: 100,
-    marginHorizontal: 10,
     alignItems: "center",
     backgroundColor: "#ed6f2c"
   },

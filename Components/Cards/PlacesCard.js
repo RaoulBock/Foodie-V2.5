@@ -16,7 +16,7 @@ const PlacesCard = ({ item }) => {
         <Text style={styles.amount}>
           ${item.amount} NAM{" "}
           <Text style={{ color: "gray", fontWeight: "400", fontSize: 18 }}>
-            {item.payment_type === "/pm" && "/Month"}
+            {item.method_type === "rent" && "/Month"}
           </Text>
         </Text>
         <Text style={styles.title}>{item.address}</Text>

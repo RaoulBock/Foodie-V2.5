@@ -38,11 +38,11 @@ const placesSchema = new Schema({
     trim: true,
     required: true
   },
-  payment_type: {
-    type: String,
-    trim: true,
-    required: true
-  },
+  // payment_type: {
+  //   type: String,
+  //   trim: true,
+  //   required: true
+  // },
   user_created: {
     type: String,
     trim: true,

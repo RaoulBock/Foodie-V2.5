@@ -147,16 +147,24 @@ export const SETTINGS_DATASET = [
   }
 ];
 
-// export const METHOD_TYPE = [
-//   {
-//     id: 1,
-//     name: "Renting"
-//   },
-//   {
-//     id: 2,
-//     name: "Selling"
-//   }
-// ];
+export const METHOD_TYPE = [
+  {
+    id: 1,
+    name: "Apartment"
+  },
+  {
+    id: 2,
+    name: "Room"
+  },
+  {
+    id: 3,
+    name: "House"
+  },
+  {
+    id: 4,
+    name: "Student"
+  }
+];
 
 export const PAYMENT_METHOD = [
   {
