@@ -62,7 +62,7 @@ export const ApiServices = {
   },
 
   on_post_house: async ({
-    streetName,
+    address,
     amount,
     description,
     description_2,
@@ -76,14 +76,14 @@ export const ApiServices = {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      streetName: streetName,
+      address: address,
       amount: amount,
       description: description,
       description_2: description_2,
       images: images,
       contactNumber: contactNumber,
       method_type: method_type,
-      user_created
+      user_created: user_created
       //  payment_type: payment_type
     });
 

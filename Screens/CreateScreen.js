@@ -33,7 +33,6 @@ const CreateScreen = () => {
   const [mainPayment, setMainPayment] = React.useState("Renting");
 
   const [images, setImages] = React.useState([]);
-  const [userDescription, setUserDescription] = React.useState([]);
 
   const [bedCount, setBedCount] = React.useState("");
   const [bathCount, setBathCount] = React.useState("");
@@ -57,34 +56,39 @@ const CreateScreen = () => {
     }
   };
 
-  const handlePost = async () => {
-    if (
-      userAddress === "" ||
-      userPrice === "" ||
-      mainPayment === "" ||
-      bedCount === "" ||
-      bathCount === "" ||
-      sqrCount === ""
-    ) {
-      setErrorMsg(
-        "Please provide the correct information before you continue."
-      );
-    } else {
-      const response = await ApiServices.on_post_house({
-        streetName: userAddress,
-        amount: userPrice,
-        description: userDescription,
-        description_2: mainMethod,
-        contactNumber: userData.account_phone,
-        method_type: mainPayment,
-        user_created: userData.account_name
-      });
+  let userDescription = [];
+  userDescription.push([bedCount, bathCount, sqrCount]);
 
-      if (response) {
-        console.log("Response house posting confirmed");
+  console.log(userDescription);
+
+  const handlePost = async () => {
+    try {
+      if (
+        userAddress === "" ||
+        userPrice === "" ||
+        mainPayment === "" ||
+        bedCount === "" ||
+        bathCount === "" ||
+        sqrCount === ""
+      ) {
+        setErrorMsg(
+          "Please provide the correct information before you continue."
+        );
       } else {
-        console.log("REsponse failed to post");
+        const response = await ApiServices.on_post_house({
+          streetName: userAddress,
+          amount: userPrice,
+          description: userDescription,
+          description_2: mainMethod,
+          contactNumber: userData.account_phone,
+          method_type: mainPayment,
+          user_created: userData.account_name
+        });
+
+        console.log(response);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
