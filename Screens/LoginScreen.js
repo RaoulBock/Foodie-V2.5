@@ -23,7 +23,7 @@ const LoginScreen = () => {
 
   React.useEffect(() => {
     console.log(userData);
-  }, [userData]);
+  }, []);
 
   const onLogin = async () => {
     if (userEmail === "" || userPassword === "") {

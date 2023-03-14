@@ -13,7 +13,7 @@ const placesSchema = new Schema({
     required: true
   },
   description: {
-    type: Array,
+    type: Object,
     trim: true,
     required: true
   },

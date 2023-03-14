@@ -97,7 +97,7 @@ export const ApiServices = {
     return fetch("https://foodie-kgss.onrender.com/places", requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        //  console.log(result);
         return JSON.parse(result);
       })
       .catch((error) => console.log("error", error));
