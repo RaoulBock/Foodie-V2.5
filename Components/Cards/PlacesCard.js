@@ -5,7 +5,7 @@ import { APP_ICONS, COLORS } from "../../Context/settings";
 const PlacesCard = ({ item }) => {
   return (
     <TouchableOpacity style={styles.outline} activeOpacity={0.9}>
-      <Image source={{ uri: item.images }} style={styles.image} />
+      <Image source={{ uri: item.images[0] }} style={styles.image} />
       <View style={styles.info}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Text>{APP_ICONS.CUBE}</Text>
@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 200
+    height: 200,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
   },
   info: {
     padding: 10

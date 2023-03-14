@@ -33,11 +33,13 @@ const CreateScreen = () => {
   const [mainPayment, setMainPayment] = React.useState("Renting");
 
   const [images, setImages] = React.useState([]);
-  const [userDescription, setUserDescription] = React.useState([
-    bedCount,
-    bathCount,
-    sqrCount
-  ]);
+  const [userDescription, setUserDescription] = React.useState([]);
+
+  React.useEffect(() => {
+    userDescription.push([bedCount, bathCount, sqrCount]);
+  }, []);
+
+  console.log(userDescription);
 
   const [bedCount, setBedCount] = React.useState("");
   const [bathCount, setBathCount] = React.useState("");
@@ -61,13 +63,20 @@ const CreateScreen = () => {
   };
 
   const handlePost = async () => {
-    if (userAddress === "" || userPrice === "" || mainPayment === "") {
+    if (
+      userAddress === "" ||
+      userPrice === "" ||
+      mainPayment === "" ||
+      bedCount === "" ||
+      bathCount === ""
+    ) {
       setErrorMsg(
         "Please provide the correct information before you continue."
       );
     } else {
       const response = await ApiServices.on_post_house({
         streetName: userAddress,
+        amount: userPrice,
         description: userDescription,
         description_2: mainMethod,
         images: images,
@@ -94,6 +103,7 @@ const CreateScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.section}>
           <Text style={styles.title}>Start selling today?</Text>
+          {errorMsg && <Text style={styles.error}>{errorMsg}</Text>}
           {userData.account_verification === false && (
             <Text>
               Your account is not yet verified. To continue using this feature
@@ -197,10 +207,10 @@ const CreateScreen = () => {
 
           <View style={[styles.formCtrl, { marginBottom: 50 }]}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {images.map((image) => (
+              {images.map((item, key) => (
                 <Image
-                  source={{ uri: image.uri }}
-                  key={image.uri}
+                  source={{ uri: item.uri }}
+                  key={key}
                   style={styles.createdImage}
                 />
               ))}
@@ -292,5 +302,9 @@ const styles = StyleSheet.create({
     height: 200,
     marginHorizontal: 10,
     borderRadius: 10
+  },
+  error: {
+    color: "red",
+    fontWeight: "500"
   }
 });
