@@ -35,12 +35,6 @@ const CreateScreen = () => {
   const [images, setImages] = React.useState([]);
   const [userDescription, setUserDescription] = React.useState([]);
 
-  React.useEffect(() => {
-    userDescription.push([bedCount, bathCount, sqrCount]);
-  }, []);
-
-  console.log(userDescription);
-
   const [bedCount, setBedCount] = React.useState("");
   const [bathCount, setBathCount] = React.useState("");
   const [sqrCount, setSqrCount] = React.useState("");
@@ -57,8 +51,9 @@ const CreateScreen = () => {
       quality: 1
     });
 
-    if (!result.cancelled) {
-      setImages(result.assets);
+    if (!result.canceled) {
+      JSON.parse(result);
+      setImages(result);
     }
   };
 
@@ -68,7 +63,8 @@ const CreateScreen = () => {
       userPrice === "" ||
       mainPayment === "" ||
       bedCount === "" ||
-      bathCount === ""
+      bathCount === "" ||
+      sqrCount === ""
     ) {
       setErrorMsg(
         "Please provide the correct information before you continue."
@@ -79,9 +75,9 @@ const CreateScreen = () => {
         amount: userPrice,
         description: userDescription,
         description_2: mainMethod,
-        images: images,
         contactNumber: userData.account_phone,
-        method_type: mainPayment
+        method_type: mainPayment,
+        user_created: userData.account_name
       });
 
       if (response) {

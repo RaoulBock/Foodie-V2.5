@@ -68,7 +68,8 @@ export const ApiServices = {
     description_2,
     images,
     contactNumber,
-    method_type
+    method_type,
+    user_created
     // payment_type
   }) => {
     var myHeaders = new Headers();
@@ -81,7 +82,8 @@ export const ApiServices = {
       description_2: description_2,
       images: images,
       contactNumber: contactNumber,
-      method_type: method_type
+      method_type: method_type,
+      user_created
       //  payment_type: payment_type
     });
 
